@@ -1,0 +1,114 @@
+/* Base + Theme Vars */
+* { box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+:root{
+  --bg: #0B0716;
+  --bg-grad-a: #0B0716;
+  --bg-grad-b: #140E23;
+  --surface: rgba(28, 22, 43, 0.6);
+  --surface-2: rgba(28, 22, 43, 0.45);
+  --border: rgba(236, 72, 153, 0.18);
+  --text: #EDECF3;
+  --muted: #A7A4B5;
+  --accent: #F472B6;      /* rose-400 */
+  --accent-strong: #EC4899;/* rose-500 */
+  --accent-soft: #FBCFE8;  /* rose-200 */
+  --warning: #FDBA74;
+  --chip: #3B2A3C;
+  --ring: rgba(244, 114, 182, .45);
+}
+
+body { 
+  margin: 0; 
+  color: var(--text); 
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(236,72,153,.12), transparent 60%),
+    radial-gradient(1000px 500px at -10% 110%, rgba(244,114,182,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg-grad-a), var(--bg-grad-b));
+}
+
+.app { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+/* Header */
+header h1 { margin: 0; font-size: 1.9rem; letter-spacing:.2px; }
+header p { margin: .25rem 0 1.25rem; color: var(--muted); }
+
+/* Cards */
+.dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.card { 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: .9rem; 
+  padding: 1rem; 
+  backdrop-filter: blur(12px); 
+  box-shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+}
+.card h2 { margin-top: 0; font-size: 1rem; }
+.ai-card span { font-weight: 700; color: var(--accent-strong); }
+
+/* Chart */
+.chart-section { position: relative; background: var(--surface-2); border: 1px solid var(--border); border-radius: .9rem; padding: 1rem; margin-bottom: 1.5rem; }
+.chart-axis { position: absolute; inset: 0; pointer-events: none; }
+.chart-axis #y-min, .chart-axis #y-max { position: absolute; left: 8px; font-size: .75rem; color: var(--muted); }
+.chart-axis #y-min { bottom: 6px; }
+.chart-axis #y-max { top: 6px; }
+
+/* Buttons */
+.actions .btn-group { display: flex; gap: 1rem; margin-bottom: .75rem; }
+button { 
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  border: 0;
+  padding: .6rem 1.4rem; 
+  border-radius: .7rem; 
+  font-weight: 650; 
+  cursor: pointer; 
+  color: #1a0e17;
+  transition: transform .08s ease-out, opacity .2s, box-shadow .2s, filter .2s;
+  box-shadow: 0 6px 16px rgba(236,72,153,.35);
+}
+button:hover { filter: brightness(1.04); box-shadow: 0 10px 20px rgba(236,72,153,.42); }
+button:active { transform: translateY(1px); }
+button[disabled] { opacity: .5; cursor: not-allowed; box-shadow: none; }
+
+button.secondary { 
+  background: #1c1631; 
+  color: var(--text); 
+  border: 1px solid rgba(244,114,182,.18);
+}
+
+/* Focus states (accessibility) */
+button:focus-visible, select:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+/* Log */
+.log ul { list-style: none; padding: 0; max-height: 220px; overflow-y: auto; }
+.log li { margin-bottom: .5rem; font-size: .85rem; color: var(--muted); }
+
+/* Status / Hints */
+#status { font-size: .85rem; color: var(--warning); }
+.hint { color: var(--muted); font-size: .75rem; margin-bottom: .5rem; }
+small { color: var(--muted); }
+
+/* Webcam / Inputs */
+.webcam-section { margin-top: 1.5rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: .9rem; padding: 1rem; max-width: 280px; }
+.webcam-section video { border-radius: .6rem; background: #0e0a17; }
+
+select { 
+  background: #140e23; 
+  color: var(--text); 
+  border: 1px solid rgba(244,114,182,.28); 
+  border-radius: .4rem; 
+  padding: .35rem .5rem; 
+  margin-bottom: .5rem; 
+}
+
+.mood { margin-top: .5rem; color: var(--accent-soft); font-size: .85rem; }
+
+/* Optional: subtle “chip” label style */
+.badge {
+  display:inline-flex; align-items:center; gap:.35rem;
+  background: var(--chip);
+  color: var(--accent-soft);
+  padding:.25rem .6rem; border-radius: 999px; font-size:.75rem; border:1px solid rgba(244,114,182,.15);
+}

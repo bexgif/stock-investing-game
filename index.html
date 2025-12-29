@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EMPATH – AI Investment Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- TensorFlow.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.21.0/dist/tf.min.js"></script>
+  <!-- BlazeFace face detector -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>EMPATH 📈</h1>
+      <p>Finance simulation game with AI advisor + face-aware guidance</p>
+    </header>
+
+    <section class="dashboard">
+      <div class="card">
+        <h2>Player Portfolio</h2>
+        <p>Cash: <span id="cash">£10,000.00</span></p>
+        <p>Shares: <span id="shares">0</span></p>
+        <p>Portfolio value: <span id="portfolio">£10,000.00</span></p>
+      </div>
+
+      <div class="card">
+        <h2>Market</h2>
+        <p>Current price: <span id="price">—</span></p>
+        <p>Day: <span id="day">1</span></p>
+      </div>
+
+      <div class="card ai-card">
+        <h2>AI Advisor 🤖</h2>
+        <label for="aiMode">Mode:</label>
+        <select id="aiMode">
+          <option value="nn">Neural (TF.js)</option>
+          <option value="rule">Rule-based</option>
+          <option value="face" selected>Face-aware coach</option>
+        </select>
+
+        <p>AI thinks you should: <span id="ai-action">...</span></p>
+        <small id="ai-reason"></small>
+        <p class="mood" id="mood-msg" aria-live="polite">Camera not used yet.</p>
+        <small>Engagement: <span id="ai-engagement">0%</span> · Mood: <span id="ai-mood">—</span></small>
+      </div>
+
+      <div class="card">
+        <h2>Performance</h2>
+        <p>AI ROI: <span id="ai-roi">—</span></p>
+        <p>Player ROI: <span id="player-roi">0.0%</span></p>
+        <p>AI decision accuracy: <span id="ai-acc">—</span></p>
+      </div>
+    </section>
+
+    <section class="chart-section">
+      <canvas id="priceChart" width="600" height="200"></canvas>
+      <div class="chart-axis">
+        <span id="y-min">£—</span>
+        <span id="y-max">£—</span>
+      </div>
+    </section>
+
+    <section class="actions">
+      <h2>Your move</h2>
+      <div class="btn-group">
+        <button id="buyBtn" title="Buy 1 share">Buy</button>
+        <button id="sellBtn" title="Sell 1 share">Sell</button>
+        <button id="holdBtn" class="secondary" title="Do nothing">Hold</button>
+      </div>
+      <p id="status" aria-live="polite"></p>
+    </section>
+
+        <section class="data-upload card">
+  <h2>Load price data (CSV)</h2>
+  <input id="csvFile" type="file" accept=".csv" />
+  <p class="hint">
+    Expected CSV: two columns, <code>Date,Price</code>. Dates like <code>31/10/2025</code> or <code>2025-10-31</code> are fine.
+  </p>
+</section>
+
+    <section class="webcam-section">
+      <h2>Face input (optional)</h2>
+      <p class="hint" id="face-hint">Loading camera…</p>
+      <video id="video" width="220" height="165" autoplay muted></video>
+      <p>Face detected: <span id="face-status">no</span></p>
+      <p>Engagement: <span id="engagement">0%</span> · Mood: <span id="mood-label">—</span></p>
+    </section>
+
+    <section class="log">
+      <h2>Activity Log</h2>
+      <ul id="logList"></ul>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
